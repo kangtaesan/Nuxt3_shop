@@ -31,4 +31,7 @@ export default defineNuxtConfig({
     }
   },
   css: ['@/assets/css/reset.css'],
+  devServer: {
+    port: process.env.NODE_ENV === 'production' ? undefined : 5000
+  }
 })
