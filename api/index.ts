@@ -1,15 +1,21 @@
 import axios from 'axios'
-
-const instance = axios.create({
-    baseURL: 'http://localhost:3000',
-})
+// nuxt.config.ts에서 환경변수로 baseURL 설정
+function instance() {
+    const config = useRuntimeConfig()
+    return axios.create({
+        baseURL: config.public.baseURL
+    })
+}
+// const instance = axios.create({
+//     baseURL: process.env.baseURL,
+// })
 
 function fetchProductById(id: number) {
-    return instance.get(`/products/${id}`)
+    return instance().get(`/products/${id}`)
 }
 
 function fetchProductByKeyword(keyword: string) {
-    return instance.get(`/products/`, {
+    return instance().get(`/products/`, {
         params: {
             name_like: keyword,
         }
@@ -25,11 +31,11 @@ interface cartItem {
   }
 
 function createCartItem(cartItem: cartItem) {
-    return instance.post('/carts', cartItem)
+    return instance().post('/carts', cartItem)
 }
 
 function fetchCartItems() {
-    return instance.get('/carts')
+    return instance().get('/carts')
 }
 
 export { fetchProductById, fetchProductByKeyword, createCartItem, fetchCartItems }

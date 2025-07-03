@@ -33,5 +33,14 @@ export default defineNuxtConfig({
   css: ['@/assets/css/reset.css'],
   devServer: {
     port: process.env.NODE_ENV === 'production' ? undefined : 5000
+  },
+
+  //env config - Nuxt3 runtimeConfig
+  runtimeConfig: {
+    public: {
+      baseURL: process.env.NODE_ENV === 'production'
+        ? 'https://my-json-server.typicode.com/joshua1988/nuxt-shopping-api'
+        : 'http://localhost:3000'
+    }
   }
 })

@@ -22,10 +22,11 @@ interface Product {
   price: string
   imageUrl: string
 }
-
+const config = useRuntimeConfig() //nuxt.config.ts의 runtimeConfig 사용
 const products = ref<Product[]>([])
 const { data: initialData, error } = await useAsyncData<Product[]>('products', () =>
-  $fetch('http://localhost:3000/products')
+  $fetch(`${config.public.baseURL}/products`)
+  //runtimeConfig 속 정의 된 public 속 baseURL을 가져옴
 )
 if (initialData.value) {
   products.value = initialData.value
