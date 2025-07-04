@@ -37,6 +37,24 @@ const route = useRoute()
 const { data: product, error } = await useAsyncData<Product>('product', () =>
   fetchProductById(Number(route.params.id)).then(response => response.data)
 )
+
+
+// ⭐ product.value가 로드된 뒤 meta 태그 설정
+watchEffect(() => {
+  if (product.value) {
+    useHead({
+      title: `${product.value.name} | 상품 상세`,
+      meta: [
+        { name: 'description', content: `${product.value.name}의 상세 정보입니다.` },
+        { property: 'og:title', content: product.value.name },
+        { property: 'og:description', content: `${product.value.name}의 상세 페이지입니다.` },
+        { property: 'og:image', content: product.value.imageUrl },
+        { property: 'og:url', content: `https://nuxtshopping.netlify.app/detail/${product.value.id}` },
+      ]
+    })
+  }
+})
+
 // 에러 확인 (콘솔 출력)
 if (error.value) {
   console.error('Fetch 에러:', error.value)
