@@ -1,14 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: true,
   app: {
     head: {
       htmlAttrs: {
         lang: 'ko'
       },
-      title: 'learn-nuxt3',
+      title: 'Nuxt Shopping',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'learn-nuxt3' },
+        { name: 'description', content: 'Nuxt Shopping Example' },
         { charset: 'utf-8' },
         { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' }
       ],
